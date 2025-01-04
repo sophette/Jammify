@@ -1,0 +1,103 @@
+/* Card style for displaying each item in a grid */
+.card {
+    flex: 1 0 calc(33.33% - 20px); /* Ensures each card takes up 1/3 of the container width, minus some margin */
+    margin: 10px; /* Adds margin around each card */
+    text-align: center; /* Center-aligns the text inside each card */
+    color: white; /* Sets text color to white */
+}
+
+/* Style for the hover effect container */
+.hoverbox {
+    height: 200px; /* Fixed height for consistency */
+    background: #ccc; /* Light gray background */
+    display: flex; /* Use flexbox for easy centering */
+    justify-content: center; /* Center-align items horizontally */
+    align-items: center; /* Center-align items vertically */
+    overflow: hidden; /* Hide anything that exceeds the box's boundary */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+/* Ensure image fills the container without distortion */
+.hoverbox img {
+    width: 100%; /* Make the image width 100% of its container */
+    height: 100%; /* Make the image height 100% of its container */
+    object-fit: cover; /* Crop and scale the image to cover the entire container */
+}
+
+/* Styling for the card title */
+.card h3 {
+    margin: 10px 0 5px; /* Add spacing around the title */
+    font-size: 1rem; /* Set font size for the title */
+}
+
+/* Styling for the card description (optional) */
+.card p {
+    margin: 0; /* Remove margin */
+    font-size: 0.875rem; /* Slightly smaller font for description */
+}
+
+/* Style for the popup canvas (appears on top of page) */
+#popupCanvas {
+    position: fixed; /* Position it fixed on the screen */
+    top: 10%; /* 10% from the top */
+    left: 10%; /* 10% from the left */
+    width: 80%; /* Make the popup take up 80% of the screen's width */
+    height: 80%; /* Make the popup take up 80% of the screen's height */
+    background-color: rgba(94, 93, 93, 0.95); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's above other content */
+    display: flex; /* Use flexbox to center the content */
+    flex-direction: column; /* Stack the content vertically */
+    align-items: center; /* Center-align items horizontally */
+    justify-content: flex-start; /* Align items from the top */
+    padding: 20px; /* Add padding around the content */
+    border-radius: 10px; /* Rounded corners for the popup */
+    box-sizing: border-box; /* Include padding in the element's total size */
+}
+
+/* Content inside the popup (displays the song name) */
+#popupContent {
+    width: 100%; /* Ensure content takes up the full width of the popup */
+    text-align: center; /* Center-align the text */
+    color: white; /* White text color */
+    font-size: 1.5rem; /* Larger font size for the song name */
+    margin-top: auto; /* Push content below any other elements like arrows */
+}
+
+/* Close button (×) for the popup */
+#closePopup {
+    position: absolute; /* Fixed position at the top-right of the popup */
+    top: 10px; /* 10px from the top */
+    right: 20px; /* 20px from the right */
+    font-size: 2rem; /* Larger font size for visibility */
+    color: white; /* White text color */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Speed control container at the bottom of the popup */
+#speedControl {
+    position: absolute; /* Fixed at the bottom of the popup */
+    bottom: 20px; /* 20px from the bottom */
+    left: 0; /* Align to the left edge */
+    width: 100%; /* Make the control take up the full width */
+    display: flex; /* Use flexbox for easy alignment of arrows */
+    justify-content: space-around; /* Space out the arrows evenly */
+    align-items: center; /* Align items vertically in the center */
+    color: white; /* White text color */
+}
+
+/* Individual arrow button (slower/faster) */
+.arrow {
+    display: flex; /* Use flexbox to align text and icon vertically */
+    flex-direction: column; /* Stack text and icon vertically */
+    align-items: center; /* Center-align the content */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 3rem; /* Make arrows large for easy interaction */
+    text-shadow: 0px 0px 5px #000; /* Add a shadow for better visibility */
+    text-align: center; /* Center-align the arrow content */
+}
+
+/* Text under the arrows (slower/faster labels) */
+.arrow p {
+    margin-top: 10px; /* Add spacing between the arrow and the text */
+    font-size: 1rem; /* Smaller font for the description */
+}
