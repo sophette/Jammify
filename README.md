@@ -1,4 +1,4 @@
-Introduction: Introduction: Jammify is an interactive music experience where users can explore different songs and control their playback speed in real-time. Clicking on a preselected song, users can listen to it and adjust its speed, making it slower or faster according to their preference. Whether you're looking to enjoy a relaxing, slow tempo or speed things up for a fun twist, Jammify allows you to easily personalise your listening experience. It's a fun and engaging way to explore music.
+Introduction: Jammify is an interactive music experience where users can explore different songs and control their playback speed in real-time. Clicking on a preselected song, users can listen to it and adjust its speed, making it slower or faster according to their preference. Whether you're looking to enjoy a relaxing, slow tempo or speed things up for a fun twist, Jammify allows you to easily personalise your listening experience. It's a fun and engaging way to explore music.
 
 Link to my project diary: https://www.notion.so/Jammify-11f68fe8920c80d9bb6fdc25a2b32a32?pvs=4
 
