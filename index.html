@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jammify</title>
+
+  <!-- p5.js and p5.sound.js for audio functionality -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+  
+  <style>
+    /* General reset for margins and background color */
+    html, body {
+      margin: 0;
+      background-color: black;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Header styling */
+    #header {
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2em;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      width: 100%;
+    }
+
+    /* Grid layout for song items */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* Hover effect on song items */
+    .hoverbox {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      cursor: pointer;
+      border: 2px solid #555;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    /* Hover effect: Scale and shadow */
+    .hoverbox:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 10px #fff;
+    }
+
+    /* Image styling inside the hoverbox */
+    .hoverbox img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Title text inside hoverbox */
+    .hoverbox h3 {
+      position: absolute;
+      color: white;
+      font-size: 1.2em;
+      text-shadow: 0px 0px 5px #000;
+      z-index: 1;
+    }
+
+    /* Popup styling */
+    #popupCanvas {
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      background-color: rgba(94, 93, 93, 0.95);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 20px;
+    }
+
+    /* Close button inside popup */
+    #closePopup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Speed control buttons inside popup */
+    #speedControl {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      color: white;
+    }
+
+    /* Arrow buttons for speed control */
+    .arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      font-size: 3rem;
+      text-shadow: 0px 0px 5px #000;
+    }
+
+    .arrow p {
+      margin-top: 5px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">Jammify</div>
+
+  <!-- Grid of hoverable song items -->
+  <div class="container">
+    <!-- Each song has an image, title, and onclick handler to open popup and play the song -->
+    <div class="hoverbox" onclick="openPopup('Fur Elise'); playSong('Fur Elise')">
+      <img src="furelise.jpeg" alt="Fur Elise">
+      <h3>Fur Elise</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Peanut Butter & Tears'); playSong('Peanut Butter & Tears')">
+      <img src="peanutbuttertears.jpeg" alt="Peanut Butter & Tears">
+      <h3>Peanut Butter & Tears</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Die With A Smile'); playSong('Die With A Smile')">
+      <img src="diewithasmile.png" alt="Die With A Smile">
+      <h3>Die With A Smile</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Next To You'); playSong('Next To You')">
+      <img src="nexttoyou.jpeg" alt="Next To You">
+      <h3>Next To You</h3>
+    </div>
+    <div class="hoverbox" onclick="openPopup('Birds Of A Feather'); playSong('Birds Of A Feather')">
+      <img src="birdsofafeather.jpg" alt="Birds Of A Feather">
+      <h3>Birds Of A Feather</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Homesick'); playSong('Homesick')">
+      <img src="homesick.jpeg" alt="Homesick">
+      <h3>Homesick</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Riptide'); playSong('Riptide')">
+      <img src="riptide.jpeg" alt="Riptide">
+      <h3>Riptide</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('Best Time'); playSong('Best Time')">
+      <img src="besttime.jpeg" alt="Best Time">
+      <h3>Best Time</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('New Romantics'); playSong('New Romantics')">
+      <img src="newromantics.png" alt="New Romantics">
+      <h3>New Romantics</h3>
+    </div>
+
+    <div class="hoverbox" onclick="openPopup('the boy is mine'); playSong('the boy is mine')">
+        <img src="theboyismine.jpeg" alt="the boy is mine">
+        <h3>the boy is mine</h3>
+      </div>
+
+      <div class="hoverbox" onclick="openPopup('Espresso'); playSong('Espresso')">
+        <img src="espresso.png" alt="Espresso">
+        <h3>Espresso</h3>
+      </div>
+
+      <div class="hoverbox" onclick="openPopup('Cool With You'); playSong('Cool With You')">
+        <img src="coolwithyou.jpeg" alt="Cool With You">
+        <h3>Cool With You</h3>
+      </div>
+
+    </div>
+
+    <div id="popupCanvas">
+        <span id="closePopup" onclick="closePopup()">×</span>
+        <div id="popupContent">Now Playing: Song</div>
+        <div id="speedControl">
+          <div class="arrow left" onclick="changeSpeedAndBackground(-0.1);">
+            &#8592;
+            <p>Slower</p>
+          </div>
+          <div class="arrow right" onclick="changeSpeedAndBackground(0.1);">
+            &#8594;
+            <p>Faster</p>
+          </div>
+        </div>
+      </div>
+      
+<!-- p5.js Script for handling audio -->
+<script>
+    let songs = {}; // Store song names and audio objects
+    let currentSong;
+    const originalPopupColor = "rgba(94, 93, 93, 0.95)"; // Initial popup background color
+
+    // Preload song files
+    function preload() {
+      soundFormats('mp3');
+      songs = {
+        'Fur Elise': loadSound('furelise.mp3'),
+        'Peanut Butter & Tears': loadSound('peanutbutterandtears.mp3'),
+        'Die With A Smile': loadSound('diewithasmile.mp3'),
+		'Next To You': loadSound('nexttoyou.mp3'),
+		'Birds Of A Feather': loadSound('birdsofafeather.mp3'),
+		'Homesick': loadSound('homesick.mp3'),
+		'Riptide': loadSound('riptide.mp3'),
+		'Best Time': loadSound('besttime.mp3'),
+		'New Romantics': loadSound('newromantics.mp3'),
+		'the boy is mine': loadSound('theboyismine.mp3'),
+		'Espresso': loadSound('espresso.mp3'),
+		'Cool With You': loadSound('coolwithyou.mp3')
+       
+      };
+    }
+
+    // p5.js setup, no canvas needed here
+    function setup() {
+      noCanvas();
+    }
+
+    // Function to play a selected song
+    function playSong(songName) {
+      if (getAudioContext().state !== 'running') {
+        getAudioContext().resume(); // Resume audio context if paused
+      }
+      if (currentSong && currentSong.isPlaying()) {
+        currentSong.stop(); // Stop the currently playing song
+      }
+      currentSong = songs[songName]; // Set the selected song as current
+      currentSong.play(); // Play the current song
+    }
+
+    // Open the popup and display the currently playing song
+    function openPopup(songName) {
+      const popup = document.getElementById('popupCanvas');
+      const popupContent = document.getElementById('popupContent');
+      popup.style.display = 'flex'; // Show the popup
+      popupContent.textContent = `Now Playing: ${songName}`; // Update song title
+    }
+
+    // Close the popup and stop the current song
+    function closePopup() {
+      const popup = document.getElementById('popupCanvas');
+      popup.style.display = 'none'; // Hide the popup
+      popup.style.backgroundColor = originalPopupColor; // Reset background color
+      if (currentSong) {
+        currentSong.stop(); // Stop the current song
+      }
+    }
+
+    // Change the speed of the current song
+    function changeSpeed(amount) {
+      if (currentSong) {
+        let newRate = currentSong.rate() + amount;
+        newRate = constrain(newRate, 0.5, 2.0); // Limit speed to a range
+        currentSong.rate(newRate); // Apply new speed
+      }
+    }
+
+    // Generate a random RGB color in the background
+    function getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`; // Return random color
+    }
+
+    // Change the speed and background color in the popup
+    function changeSpeedAndBackground(amount) {
+      changeSpeed(amount); // Change playback speed
+      const popup = document.getElementById('popupCanvas');
+      popup.style.backgroundColor = getRandomColor(); // Change background color
+    }
+  </script>
+</body>
+</html>
